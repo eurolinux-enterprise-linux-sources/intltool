@@ -4,7 +4,7 @@
 Name: intltool
 Summary: Utility for internationalizing various kinds of data files
 Version: 0.50.2
-Release: 5%{?dist}
+Release: 6%{?dist}
 License: GPLv2 with exceptions
 Group: Development/Tools
 #VCS: bzr:https://code.edge.launchpad.net/~intltool/intltool/trunk
@@ -51,6 +51,9 @@ make check
 %{_mandir}/man*/*
 
 %changelog
+* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 0.50.2-6
+- Mass rebuild 2013-12-27
+
 * Fri Feb  8 2013 Matthias Clasen <mclasen@redhat.com> - 0.50.2-5
 - Update url (#908562)
 
