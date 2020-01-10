@@ -4,11 +4,13 @@
 Name: intltool
 Summary: Utility for internationalizing various kinds of data files
 Version: 0.50.2
-Release: 6%{?dist}
+Release: 7%{?dist}
 License: GPLv2 with exceptions
 Group: Development/Tools
 #VCS: bzr:https://code.edge.launchpad.net/~intltool/intltool/trunk
 Source: http://edge.launchpad.net/intltool/trunk/%{version}/+download/intltool-%{version}.tar.gz
+# Backported from upstream
+Patch0: intltool-0.50.2-datadirname.patch
 URL: https://launchpad.net/intltool
 BuildArch: noarch
 Requires: patch
@@ -18,11 +20,6 @@ Requires: gettext-devel
 Requires: perl(XML::Parser)
 BuildRequires: perl(XML::Parser)
 BuildRequires: gettext
-# http://bugzilla.gnome.org/show_bug.cgi?id=568845
-# Dropping this patch per the last comment on that thread:
-# Martin Pitt: As the reporter of the bug I close this, as the new API du jour is gsettings,
-# which has a sensible gettext integration.
-#Patch0: schemas-merge.patch
 
 %description
 This tool automatically extracts translatable strings from oaf, glade,
@@ -31,6 +28,7 @@ them in the po files.
 
 %prep
 %setup -q
+%patch0 -p0
 
 %build
 %configure
@@ -51,6 +49,10 @@ make check
 %{_mandir}/man*/*
 
 %changelog
+* Wed Feb 15 2017 Kalev Lember <klember@redhat.com> - 0.50.2-7
+- Backport an upstream patch to fix DATADIRNAME substitution
+- Resolves: #1422632
+
 * Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 0.50.2-6
 - Mass rebuild 2013-12-27
 
